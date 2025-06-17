@@ -19,4 +19,9 @@ cd "$SCRIPT_DIR/.."
 docker build -D -t threejs-demo .
 
 # docker run --rm -it --mount "type=bind,src=$(realpath .),dst=/home/me/app" --user $curr_uid:$curr_gid threejs-demo
-docker run --rm -it --mount "type=bind,src=$(realpath .),dst=/home/ubuntu/app" threejs-demo
+docker run \
+  --mount "type=bind,src=$(realpath .),dst=/home/ubuntu/app" \
+  -p 3000:3000 \
+  --rm \
+  -it \
+  threejs-demo
