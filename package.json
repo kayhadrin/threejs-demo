@@ -6,13 +6,13 @@
   "type": "module",
   "scripts": {
     "docker-build": "docker build -t threejs-demo .",
-    "dev": "next dev --turbopack",
+    "//dev": "WATCHPACK_POLLING needed because the traditional linux file watcher does not work in Docker+WSL2",
+    "dev": "WATCHPACK_POLLING=750 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "next telemetry disable",
-    
-    "// next.js app created": "npx create-next-app@latest --src-dir src --turbopack --use-pnpm",
+    "// next.js app created": "npx create-next-app@latest --src-dir src --use-pnpm",
     "// format": "prettier --write .",
     "// clean": "",
     "// jest": "NODE_OPTIONS=\"$NODE_OPTIONlS --experimental-vm-modules --no-warnings\" node_modules/.bin/jest",
