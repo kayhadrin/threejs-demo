@@ -74,5 +74,5 @@ ENV HOME=/home/ubuntu
 
 RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
 
-ENTRYPOINT ["/bin/bash"]
-# ENTRYPOINT ["/bin/bash", "-l", "-c", "sleep 20"]
+ENTRYPOINT ["/bin/bash", "-l", "-c", "cd $HOME/app && bash -l"]
+# ENTRYPOINT ["/bin/bash", "-l", "-c", "cd $HOME/app && $HOME/app/scripts/pnpm.sh install && bash -l"]
