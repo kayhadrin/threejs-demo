@@ -5,9 +5,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "docker-build": "docker build -t threejs-demo .",
     "//dev": "WATCHPACK_POLLING needed because the traditional linux file watcher does not work in Docker+WSL2",
     "dev": "WATCHPACK_POLLING=750 next dev",
+    "docker-build-n-dev": "scripts/docker/build_n_dev.sh",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
