@@ -1,4 +1,8 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "files.associations": {
+    // @see https://github.com/tailwindlabs/tailwindcss/discussions/13881#discussioncomment-12173606
+    "*.css": "tailwindcss"
+  }
 }
