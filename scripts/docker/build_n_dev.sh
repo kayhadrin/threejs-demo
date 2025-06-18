@@ -2,7 +2,7 @@
 set -e
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-cd "$SCRIPT_DIR/.."
+cd "$SCRIPT_DIR/../.."
 
 # Normally, it should be the username, but I strangely see that Docker mounts target folder under the name "ubuntu" when running in WSL2...
 # So let's allow customizing the username at runtime.
@@ -18,9 +18,13 @@ cd "$SCRIPT_DIR/.."
 
 docker build -D -t threejs-demo .
 
+mkdir -p .linux_home
+touch .linux_home/.bash_history
+
 # docker run --rm -it --mount "type=bind,src=$(realpath .),dst=/home/me/app" --user $curr_uid:$curr_gid threejs-demo
 docker run \
   --mount "type=bind,src=$(realpath .),dst=/home/ubuntu/app" \
+  --mount "type=bind,src=$(realpath .)/.linux_home/.bash_history,dst=/home/ubuntu/.bash_history" \
   -p 3000:3000 \
   --rm \
   -it \
