@@ -65,6 +65,7 @@ RUN echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # RUN useradd -c "Docker user" -m -d /home/me -G sudo -s /bin/bash me
 
+# TODO: remove this? Only useful for root user during debugging
 RUN cp /home/ubuntu/.bashrc /root/.bashrc
 
 USER ubuntu
