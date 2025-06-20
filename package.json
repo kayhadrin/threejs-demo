@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "//dev": "WATCHPACK_POLLING needed because the traditional linux file watcher does not work in Docker+WSL2",
-    "dev": "WATCHPACK_POLLING=750 next dev",
+    "dev": "next dev --turbopack",
     "docker-build-n-dev": "scripts/docker/build_n_dev.sh",
     "build": "next build",
     "format": "prettier --write .",

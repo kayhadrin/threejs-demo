@@ -9,3 +9,5 @@ publicHoistPattern:
   # pnpm v10+ doesn't hoist `eslint` by default, but we need it to be hoisted
   # @see https://github.com/pnpm/pnpm/issues/8878#issuecomment-2546442011
   - '*eslint*'
+  - '@opentelemetry'
+  - '@swc'
