@@ -1,4 +1,9 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ThreeJS demo app
+
+## Goal
+
+- [ ] Demo a 3D SPA using your chosen 3D framework
+- [ ] Ensure application is **responsive** and works on **standard desktop browsers**
 
 ## Getting Started
 
@@ -16,21 +21,35 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## The state of 3D web rendering
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+While many 3D rendering libraries are currently available, my cursory research highlighted the following contenders:
 
-## Learn More
+1. [three.js](https://threejs.org/)
+1. [Babylon.js](https://www.babylonjs.com/), 24K stars on Github
+1. [PlayCanvas](https://playcanvas.com/)
 
-To learn more about Next.js, take a look at the following resources:
+### 3D library pros & cons
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Name                                     | Pros                                                                                                                                                                                                                                                                                                                                     | Cons                                                                                                       | Github ⭐ |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------- |
+| [three.js](https://threejs.org/)         | <br>- Wide 3D rendering features <br>- Mature React integration via [React Three Fiber](https://r3f.docs.pmnd.rs/getting-started/introduction) (29K⭐) <br>- Collection of ready-made "plugins" via [Drei](https://drei.docs.pmnd.rs/getting-started/introduction) (9K⭐) <br>- Continuous historical growth                             | - Complexity due to low-level graphics API <br>- No professional support AFAICT                            | 107K⭐    |
+| [Babylon.js](https://www.babylonjs.com/) | <br>- Wide 3D rendering features <br>- 3D Editor <br>- [React-Babylonjs renderer](https://github.com/brianzinn/react-babylonjs) (0.9K⭐ ) <br>- Supported by Microsoft                                                                                                                                                                   | - Extraneous features due to being a game engine (E.g. physic engine) <br>- Smaller community than threejs | 24K⭐     |
+| [PlayCanvas](https://playcanvas.com/)    | <br>- Wide 3D rendering features <br>- Comprehensive 3D Editor & Asset tooling <br>- Online integration via [Web Component API](https://developer.playcanvas.com/user-manual/web-components/) or [React renderer](https://playcanvas-react.vercel.app/docs/guide/getting-started) <br>- [Paid app hosting](https://playcanvas.com/plans) | - Extraneous features due to being a game engine (E.g. physic engine) <br>- Much smaller community         | 10K⭐     |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All three engines support advanced rendering features like PBR texturing or transparency.
 
-## Deploy on Vercel
+_See also this [Wikipedia WebGL frameworks comparison table](https://en.wikipedia.org/wiki/List_of_WebGL_frameworks) for more info._
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### npm download trends of babylonjs vs playcanvas vs three.js in the last 5 years
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![npm download trends of babylonjs vs playcanvas vs three.js in the last 5 years](3d-library-npm-trends.png)
+[_Source_](https://npmtrends.com/babylonjs-vs-playcanvas-vs-three)
+
+### Which 3D library to choose?
+
+It's clear that three.js is the most mature & popular 3D WebGL library out there. It has a large active community providing lots of reusable code samples and, after 11 years of activity, shows no sign of slowing down.
+
+On the other hand, Babylon.js and PlayCanvas are still very potent contenders thanks to their graphic feature completeness and e2e production tooling. But they seem to appeal to a smaller professional audience (e.g. game studios) as they are built & marketed as game engines; which is overkill for most general web applications.
+
+For the purpose of this 3D demo app, I'll use three.js.
