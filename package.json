@@ -1,5 +1,5 @@
 {
-  "name": "@kayhadrin/threejs-demo",
+  "name": "@kayhadrin/3d-demo",
   "description": "A demo project using Three.js with React and TypeScript.",
   "version": "0.0.1",
   "private": true,
