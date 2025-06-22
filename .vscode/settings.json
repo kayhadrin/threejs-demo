@@ -4,5 +4,6 @@
   "files.associations": {
     // @see https://github.com/tailwindlabs/tailwindcss/discussions/13881#discussioncomment-12173606
     "*.css": "tailwindcss"
-  }
+  },
+  "editor.wordWrap": "on"
 }
