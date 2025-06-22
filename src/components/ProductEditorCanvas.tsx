@@ -1,16 +1,27 @@
 'use client';
 
-import { ExtractDreiForwardRefTarget } from '@/TypeUtils';
 import { AccumulativeShadows, OrbitControls, RandomizedLight, Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Suspense, useRef } from 'react';
+import { Suspense } from 'react';
 import BeerBottleModel from './3DModels/BeerBottleModel';
+import HtmlLabel from './HtmlLabel';
 
-export default function Home() {
-  const ref = useRef<ExtractDreiForwardRefTarget<typeof OrbitControls>>(null);
+export default function ProductEditorCanvas() {
+  // const ref = useRef<ExtractDreiForwardRefTarget<typeof OrbitControls>>(null);
 
   return (
-    <Canvas camera={{ position: [0, 2, 5], fov: 75 }}>
+    <Canvas
+      id="product_editor_canvas"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+      }}
+      camera={{ position: [0, 0, 30], fov: 75 }}
+    >
       {/* Basic Lighting */}
       <color
         attach="background"
@@ -21,9 +32,20 @@ export default function Home() {
         position={[10, 10, 5]}
         intensity={1}
       />
-      <Suspense fallback={null}>
+
+      <Suspense
+        fallback={
+          <HtmlLabel rotation={[0, 0, 0]}>
+            <div
+              className="select-none"
+              style={{ position: 'absolute', fontSize: 16, scale: 4, letterSpacing: -0.5, left: 0 }}
+            >
+              Loading model...
+            </div>
+          </HtmlLabel>
+        }
+      >
         <Stage
-          controls={ref}
           preset="rembrandt"
           intensity={1}
           environment="sunset"
@@ -49,7 +71,7 @@ export default function Home() {
       </AccumulativeShadows>
 
       {/* User Controls */}
-      <OrbitControls ref={ref} />
+      <OrbitControls />
     </Canvas>
   );
 }
