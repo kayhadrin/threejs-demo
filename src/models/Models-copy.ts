@@ -1,3 +1,5 @@
+// TODO: keep or delete this file?
+
 import { ID, Nullish } from '@/TypeUtils';
 import invariant from 'invariant';
 
@@ -48,7 +50,7 @@ export class Product {
     this.customHeight = params.customHeight;
     this.customWidth = params.customWidth;
     this.customDepth = params.customDepth;
-    this.labelImageID = params.labelImageID;
+    // this.labelImageID = params.labelImageID;
   }
 }
 

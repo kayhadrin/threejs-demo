@@ -15,7 +15,6 @@ const backendDataMock: {
       name: 'Shampoo Bottle',
       containerMaterialID: castToID('container-material-1'),
       modelAssetID: castToID('model-asset-1'),
-      thumbnailImageID: castToID('image-asset-1'),
       height: 160,
       width: 120,
       depth: 120,
@@ -25,7 +24,6 @@ const backendDataMock: {
       name: 'Beer Bottle',
       containerMaterialID: castToID('container-material-2'),
       modelAssetID: castToID('model-asset-2'),
-      thumbnailImageID: castToID('image-asset-2'),
       height: 220,
       width: 100,
       depth: 100,
@@ -41,12 +39,31 @@ const backendDataMock: {
       name: 'Glass',
     },
   ],
-  imageAssets: [],
+  imageAssets: [
+    {
+      id: castToID('image-asset-1'),
+      type: 'thumbnail',
+      desc: 'Shampoo Bottle Thumbnail',
+      url: '/3DModels/shampooBottle/scene.thumbnail.png',
+      width: 468,
+      height: 496,
+    },
+    {
+      id: castToID('image-asset-2'),
+      type: 'thumbnail',
+      desc: 'Beer Bottle Thumbnail',
+      url: '/3DModels/beerBottle/scene.thumbnail.png',
+      width: 511,
+      height: 523,
+    },
+  ],
   modelAssets: [
     {
       id: castToID('model-asset-1'),
       name: 'Shampoo bottle model',
       desc: 'Shampoo bottle.',
+      uiComponentName: 'ShampooBottle3DModel',
+      thumbnailImageID: castToID('image-asset-1'),
       licenseMd: `Author: [Sousinho](https://sketchfab.com/sousinho)
 License: [SKETCHFAB Standard](https://sketchfab.com/licenses)
 Source: https://sketchfab.com/3d-models/shampoo-bottle-38508e5df44840ebae254e40e1ebd73f`,
@@ -55,6 +72,8 @@ Source: https://sketchfab.com/3d-models/shampoo-bottle-38508e5df44840ebae254e40e
       id: castToID('model-asset-2'),
       name: 'Beer glass bottle model',
       desc: 'Beer glass bottle.',
+      uiComponentName: 'BeerBottle3DModel',
+      thumbnailImageID: castToID('image-asset-2'),
       licenseMd: `Author: [gelmi.com.br](https://sketchfab.com/rodrigogelmi)
 License: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 Source: https://sketchfab.com/3d-models/beer-bottle-c3de7f8b092e4092aef14d4ffc9fac7f`,

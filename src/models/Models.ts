@@ -1,3 +1,4 @@
+import Lazy3DModels from '@/components/3DModels/Lazy3DModels';
 import { ID, Nullish } from '@/TypeUtils';
 
 /**
@@ -44,7 +45,6 @@ export interface ContainerTemplate {
    */
   depth: number;
   modelAssetID: ID<'ModelAsset'>;
-  thumbnailImageID: ID<'ImageAsset'>;
 }
 
 /**
@@ -64,7 +64,14 @@ export type ImageAssetType = 'thumbnail' | 'label';
 export interface ImageAsset {
   id: ID<'ImageAsset'>;
   type: ImageAssetType;
+  url: string;
+  /**
+   * Unit (px)
+   */
   width: number;
+  /**
+   * Unit (px)
+   */
   height: number;
   desc: string;
   thumbnailImageAssetID?: ID<'ImageAsset'> | Nullish;
@@ -77,5 +84,7 @@ export interface ModelAsset {
   id: ID<'ModelAsset'>;
   name: string;
   desc: string;
+  uiComponentName: keyof typeof Lazy3DModels;
+  thumbnailImageID: ID<'ImageAsset'>;
   licenseMd: string;
 }
