@@ -10,7 +10,7 @@ import { enforceMeshNode } from '@/TypeUtils';
 import { useGLTF } from '@react-three/drei';
 import { ComponentPropsWithRef } from 'react';
 
-const GLB_PATH = '/3d_models/beer_bottle/scene.glb';
+const GLB_PATH = '/3DModels/beerBottle/scene.glb';
 
 export default function BeerBottle3DModel(props: ComponentPropsWithRef<'group'>) {
   const { nodes, materials } = useGLTF(GLB_PATH);
