@@ -55,7 +55,7 @@ export interface ContainerMaterial {
   name: string;
 }
 
-export type ImageAssetType = 'thumnail' | 'label';
+export type ImageAssetType = 'thumbnail' | 'label';
 
 /**
  * Represents an image asset that can be used in the application.
