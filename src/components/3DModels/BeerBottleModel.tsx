@@ -6,6 +6,7 @@ Source: https://sketchfab.com/3d-models/beer-bottle-c3de7f8b092e4092aef14d4ffc9f
 Title: Beer Bottle
 */
 
+import { enforceMeshNode } from '@/TypeUtils';
 import { useGLTF } from '@react-three/drei';
 import { ComponentPropsWithRef } from 'react';
 
@@ -21,31 +22,31 @@ export default function BeerBottleModel(props: ComponentPropsWithRef<'group'>) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.GARRAFA_VIDRO_FORA_0.geometry}
+        geometry={enforceMeshNode(nodes.GARRAFA_VIDRO_FORA_0).geometry}
         material={materials.VIDRO_FORA}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.GARRAFA_VIDRO_DENTRO_0.geometry}
+        geometry={enforceMeshNode(nodes.GARRAFA_VIDRO_DENTRO_0).geometry}
         material={materials.VIDRO_DENTRO}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.GARRAFA_LIQUIDO_0.geometry}
+        geometry={enforceMeshNode(nodes.GARRAFA_LIQUIDO_0).geometry}
         material={materials.LIQUIDO}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.GARRAFA_TAMPA_0.geometry}
+        geometry={enforceMeshNode(nodes.GARRAFA_TAMPA_0).geometry}
         material={materials.TAMPA}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.GARRAFA_LIMITE_LIQUIDO_0.geometry}
+        geometry={enforceMeshNode(nodes.GARRAFA_LIMITE_LIQUIDO_0).geometry}
         material={materials.LIMITE_LIQUIDO}
       />
     </group>
