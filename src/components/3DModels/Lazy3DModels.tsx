@@ -1,4 +1,8 @@
 import { lazy } from 'react';
 
-export const BeerBottle3DModel = lazy(() => import('./BeerBottle3DModel'));
-export const ShampooBottle3DModel = lazy(() => import('./ShampooBottle3DModel'));
+const Lazy3DModels = {
+  BeerBottle3DModel: lazy(() => import('./BeerBottle3DModel')),
+  ShampooBottle3DModel: lazy(() => import('./ShampooBottle3DModel')),
+};
+
+export default Lazy3DModels;

@@ -3,7 +3,7 @@
 import { AccumulativeShadows, OrbitControls, RandomizedLight, Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import * as Lazy3DModels from './3DModels/Lazy3DModels';
+import Lazy3DModels from './3DModels/Lazy3DModels';
 import HtmlLabel from './HtmlLabel';
 
 export default function ProductEditorCanvas() {
