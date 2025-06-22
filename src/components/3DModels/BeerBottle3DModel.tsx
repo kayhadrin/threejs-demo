@@ -12,7 +12,7 @@ import { ComponentPropsWithRef } from 'react';
 
 const GLB_PATH = '/3d_models/beer_bottle/scene.glb';
 
-export default function BeerBottleModel(props: ComponentPropsWithRef<'group'>) {
+export default function BeerBottle3DModel(props: ComponentPropsWithRef<'group'>) {
   const { nodes, materials } = useGLTF(GLB_PATH);
   return (
     <group

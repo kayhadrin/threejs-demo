@@ -3,7 +3,7 @@
 import { AccumulativeShadows, OrbitControls, RandomizedLight, Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import BeerBottleModel from './3DModels/BeerBottleModel';
+import BeerBottle3DModel from './3DModels/BeerBottle3DModel';
 import HtmlLabel from './HtmlLabel';
 
 export default function ProductEditorCanvas() {
@@ -50,7 +50,7 @@ export default function ProductEditorCanvas() {
           intensity={1}
           environment="sunset"
         >
-          <BeerBottleModel />
+          <BeerBottle3DModel />
         </Stage>
       </Suspense>
 
