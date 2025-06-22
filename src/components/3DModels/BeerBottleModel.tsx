@@ -9,8 +9,6 @@ Title: Beer Bottle
 import { useGLTF } from '@react-three/drei';
 import { ComponentPropsWithRef } from 'react';
 
-// import React from 'react';
-
 const GLB_PATH = '/3d_models/beer_bottle/scene.glb';
 
 export default function BeerBottleModel(props: ComponentPropsWithRef<'group'>) {
