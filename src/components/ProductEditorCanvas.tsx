@@ -12,14 +12,9 @@ export default function ProductEditorCanvas() {
   return (
     <Canvas
       id="product_editor_canvas"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 0,
-      }}
+      className="top-0 left-0 z-0 h-full w-full"
+      // Keep explicit "fixed" position to ensure it covers the entire viewport
+      style={{ position: 'fixed' }}
       camera={{ position: [0, 0, 30], fov: 75 }}
     >
       {/* Basic Lighting */}
