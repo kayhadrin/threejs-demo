@@ -12,6 +12,8 @@ describe('ProductEditor component', () => {
   });
 
   describe('when the user selects a container material and container template', () => {
+    // Warning: this test logs some console.errors but it doesn't actually fail the test expectations
+    // Message looks like: `The current testing environment is not configured to support act(...)`
     it('renders a 3D model', async () => {
       const user = userEvent.setup();
       let container;
@@ -27,6 +29,7 @@ describe('ProductEditor component', () => {
       await act(async () => {
         await user.click(screen.getByAltText(/Shampoo bottle/i));
       });
+
       expect(container).toMatchSnapshot();
     });
   });
