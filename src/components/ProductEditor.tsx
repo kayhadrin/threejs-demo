@@ -66,6 +66,7 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
           <label className="flex flex-col">
             <span className="mb-1 font-medium">Container Material</span>
             <select
+              name="container-material-dropdown"
               className="rounded border px-2 py-1"
               style={{ backgroundColor: 'rgba(255,255,255,0.8)' }}
               value={containerMaterialID ?? ''}
