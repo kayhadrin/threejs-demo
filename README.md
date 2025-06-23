@@ -27,7 +27,7 @@ _See also this [Wikipedia WebGL frameworks comparison table](https://en.wikipedi
 
 ### npm download trends of babylonjs vs playcanvas vs three.js in the last 5 years
 
-![npm download trends of babylonjs vs playcanvas vs three.js in the last 5 years](3d-library-npm-trends.png)
+![npm download trends of babylonjs vs playcanvas vs three.js in the last 5 years](docs/3d-library-npm-trends.png)
 [_Source_](https://npmtrends.com/babylonjs-vs-playcanvas-vs-three)
 
 ### Which 3D library to choose?
@@ -50,7 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Preview
 
-![Demo preview](demo-preview.png)
+![Demo preview](docs/demo-preview.png)
 
 ### Development
 
@@ -58,8 +58,7 @@ It's recommended to use Docker to create a build & run this demo in a container:
 
 ```bash
 # CWD: this git repo
-docker build -t threejs-demo .
-docker run --rm -it --mount "type=bind,src=$(realpath .),dst=/home/me" threejs-demo
+scripts/docker/build_n_dev.sh
 ```
 
 # You can then run this command in the Docker container:
@@ -73,6 +72,8 @@ pnpm dev
 - This demo simulates backend connections via an async DataLayer API.
 - Limited Jest unit testing since webGL canvas isn't available by default. Ideally, e2e tests would add better test coverage.
 - Jest `--watch` feature doesn't detect file changes on Windows + Docker. Just trigger test reruns manually...
+- DataLayer is not fully used yet
+- Default 3D scene & camera settings are still hard-coded in a React component
 
 # Known issues
 
@@ -80,7 +81,24 @@ pnpm dev
 - A "Loading..." notification is supposed to appear when the 3D model is being downloaded; but it doesn't always consistently appear
 - Some React warnings appear during Jest unit tests (related to `act()`) but I still manage to test the main target functionalities. (See `src/components/__tests__/ProductEditor.test.tsx`)
 
-# High-Level Summary of the Product Editor
+# High-level summary of JS modules
+
+![JS dependency graph](docs/js-deps-graph.png)
+
+- `Models`:
+
+  - Typescript model definitions of the app schema.
+    - `Product` / `DraftProduct`: physical product (e.g. a bottle of beer)
+    - `ContainerTemplate`: template of a product container. E.g. Generic bottle
+    - `ContainerMaterial`: physical material category. E.g. plastic, glass, etc...
+    - `ImageAsset`: image asset
+    - `ModelAsset`: 3D model asset
+
+- `DataLayer`:
+
+  - Abstraction layer for the backend
+  - Provides API to retrieve models asynchronously
+    - E.g. get product draft, get product templates
 
 - `ProductEditorPage`: an async React Server Component page for Next.js.
 
@@ -92,3 +110,14 @@ pnpm dev
   - A React component responsible for rendering and managing the product editing UI.
   - Expects an `init` prop with initial values for `containerMaterialID` and `containerTemplateID`.
   - Manages form state (`DraftProduct` from `Models.ts`), basic validation, and render logic to display a 3D model for the product.
+  - Displays a Share button to facilitate bookmarking the current page state.
+
+- `ProductEditorCanvas`:
+
+  - React component dedicated to render a 3D product preview on a UI canvas
+  - Target 3D product asset are loaded asynchronously
+
+- `Lazy3DModels`:
+
+  - React component to help load 3D model assets asynchronously.
+  - Individual models can be loaded thanks to the `React.lazy()` API
