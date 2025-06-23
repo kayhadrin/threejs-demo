@@ -67,20 +67,6 @@ scripts/docker/build_n_dev.sh
 pnpm dev
 ```
 
-# Known limitations
-
-- This demo simulates backend connections via an async DataLayer API.
-- Limited Jest unit testing since webGL canvas isn't available by default. Ideally, e2e tests would add better test coverage.
-- Jest `--watch` feature doesn't detect file changes on Windows + Docker. Just trigger test reruns manually...
-- DataLayer is not fully used yet
-- Default 3D scene & camera settings are still hard-coded in a React component
-
-# Known issues
-
-- When loading the product editor with the beer bottle model by default, the view is occluded because the camera position is inside the bottle.
-- A "Loading..." notification is supposed to appear when the 3D model is being downloaded; but it doesn't always consistently appear
-- Some React warnings appear during Jest unit tests (related to `act()`) but I still manage to test the main target functionalities. (See `src/components/__tests__/ProductEditor.test.tsx`)
-
 # High-level summary of JS modules
 
 ![JS dependency graph](docs/js-deps-graph.png)
@@ -124,3 +110,27 @@ pnpm dev
 
   - React component to help load 3D model assets asynchronously.
   - Individual models can be loaded thanks to the `React.lazy()` API
+
+# Known limitations
+
+- This demo simulates backend connections via an async DataLayer API.
+- Limited Jest unit testing since webGL canvas isn't available by default. Ideally, e2e tests would add better test coverage.
+- Jest `--watch` feature doesn't detect file changes on Windows + Docker. Just trigger test reruns manually...
+- DataLayer is not fully used yet
+- Default 3D scene & camera settings are still hard-coded in a React component
+
+# Known issues
+
+- When loading the product editor with the beer bottle model by default, the view is occluded because the camera position is inside the bottle.
+- A "Loading..." notification is supposed to appear when the 3D model is being downloaded; but it doesn't always consistently appear
+- Some React warnings appear during Jest unit tests (related to `act()`) but I still manage to test the main target functionalities. (See `src/components/__tests__/ProductEditor.test.tsx`)
+
+# Challenges
+
+- It was my first time using many of the tools used in this demo: next.js, Tailwind, Three.js & React Three Fiber
+  - It took some time setting these up and getting my head around their core APIs
+  - Getting a decent understanding of what causes React components to be rendered in SSR/clientside by next.js
+- Challenges with Three.js:
+  - Getting a general understanding of the various parts of the three.js 3D modeling concepts (scene, camera, mesh objects)
+  - Figuring out how to import and load open-source 3D models in GLTF/GLB format
+  - Making a WIP loader indicator for Three.js; it's still unstable at this level
