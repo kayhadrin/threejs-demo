@@ -3,7 +3,9 @@ import invariant from 'invariant';
 import * as THREE from 'three';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-type ExtractDreiForwardRefTarget<T> = T extends ForwardRefComponent<infer P, infer T> ? T : never;
+export type ExtractDreiForwardRefTarget<T> =
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  T extends ForwardRefComponent<infer P, infer T> ? T : never;
 
 // opaque type
 export type ID<Name extends string> = string & { _name: Name };

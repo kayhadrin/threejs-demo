@@ -1,18 +1,50 @@
 'use client';
 
-import { AccumulativeShadows, OrbitControls, RandomizedLight, Stage } from '@react-three/drei';
+import { ExtractDreiForwardRefTarget } from '@/TypeUtils';
+import {
+  AccumulativeShadows,
+  OrbitControls,
+  PerspectiveCamera,
+  RandomizedLight,
+  Stage,
+} from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Children, ReactNode, Suspense } from 'react';
+import { Children, ReactNode, Suspense, useEffect, useRef } from 'react';
 import HtmlLabel from './HtmlLabel';
 
+const DEFAULT_CAMERA_POSITION: [x: number, y: number, z: number] = [0, 0, 30];
+
 export default function ProductEditorCanvas({ children }: { children?: ReactNode }) {
+  const cameraRef = useRef<ExtractDreiForwardRefTarget<typeof PerspectiveCamera> | null>(null);
+  const controlsRef = useRef<ExtractDreiForwardRefTarget<typeof OrbitControls> | null>(null);
+  const hasChildren = Children.count(children) > 0;
+
+  useEffect(() => {
+    if (!hasChildren) {
+      //DEBUG
+      // console.log(
+      //   'ProductEditorCanvas has no children, resetting camera to default position and controls',
+      //   cameraRef.current,
+      //   controlsRef.current
+      // );
+      cameraRef.current?.position.set(...DEFAULT_CAMERA_POSITION);
+      controlsRef.current?.update();
+    }
+  }, [hasChildren]);
+
   return (
     <Canvas
       className="top-0 left-0 z-0 h-full w-full"
       // Keep explicit "fixed" position to ensure it covers the entire viewport
       style={{ position: 'fixed' }}
-      camera={{ position: [0, 0, 30], fov: 75 }}
+      camera={{ position: DEFAULT_CAMERA_POSITION, fov: 75 }}
+      fallback={<strong>Browser unsupported! :-(</strong>}
     >
+      <PerspectiveCamera
+        makeDefault
+        ref={cameraRef}
+      />
+
       {/* Basic Lighting */}
       <color
         attach="background"
@@ -24,7 +56,7 @@ export default function ProductEditorCanvas({ children }: { children?: ReactNode
         intensity={1}
       />
 
-      {Children.count(children) > 0 ? (
+      {hasChildren ? (
         <>
           <Suspense
             fallback={
@@ -67,16 +99,26 @@ export default function ProductEditorCanvas({ children }: { children?: ReactNode
               bias={0.001}
             />
           </AccumulativeShadows>
+
+          {/* User Controls */}
+          <OrbitControls
+            ref={controlsRef}
+            // onChange={(e) => {
+            //   console.log('OrbitControls change:', e.target.object.position);
+            // }}
+            // onEnd={(e) => {
+            //   console.log('OrbitControls end:', e.target);
+            // }}
+            // onStart={(e) => {
+            //   console.log('OrbitControls start:', e.target);
+            // }}
+            minAzimuthAngle={-Math.PI}
+            maxAzimuthAngle={Math.PI}
+            minPolarAngle={-Math.PI / 2}
+            maxPolarAngle={Math.PI}
+          />
         </>
       ) : null}
-
-      {/* User Controls */}
-      <OrbitControls
-        minAzimuthAngle={-Math.PI}
-        maxAzimuthAngle={Math.PI}
-        minPolarAngle={-Math.PI / 2}
-        maxPolarAngle={Math.PI}
-      />
     </Canvas>
   );
 }
