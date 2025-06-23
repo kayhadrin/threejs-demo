@@ -21,12 +21,7 @@ export default function ProductEditorCanvas({ children }: { children?: ReactNode
 
   useEffect(() => {
     if (!hasChildren) {
-      //DEBUG
-      // console.log(
-      //   'ProductEditorCanvas has no children, resetting camera to default position and controls',
-      //   cameraRef.current,
-      //   controlsRef.current
-      // );
+      // ProductEditorCanvas has no children, resetting camera to default position and controls
       cameraRef.current?.position.set(...DEFAULT_CAMERA_POSITION);
       controlsRef.current?.update();
     }
@@ -60,6 +55,7 @@ export default function ProductEditorCanvas({ children }: { children?: ReactNode
         <>
           <Suspense
             fallback={
+              // TODO: BUG: label is not visible when loading children; seems to be a camera/scale issue
               <HtmlLabel rotation={[0, 0, 0]}>
                 <div
                   className="select-none"
@@ -103,15 +99,6 @@ export default function ProductEditorCanvas({ children }: { children?: ReactNode
           {/* User Controls */}
           <OrbitControls
             ref={controlsRef}
-            // onChange={(e) => {
-            //   console.log('OrbitControls change:', e.target.object.position);
-            // }}
-            // onEnd={(e) => {
-            //   console.log('OrbitControls end:', e.target);
-            // }}
-            // onStart={(e) => {
-            //   console.log('OrbitControls start:', e.target);
-            // }}
             minAzimuthAngle={-Math.PI}
             maxAzimuthAngle={Math.PI}
             minPolarAngle={-Math.PI / 2}
