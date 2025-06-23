@@ -1,7 +1,7 @@
 {
   "name": "@kayhadrin/3d-demo",
   "description": "A demo project using Three.js with React and TypeScript.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
