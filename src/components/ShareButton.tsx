@@ -23,10 +23,11 @@ export default function ShareButton({ url }: { url: string }) {
       </span>
       <Link
         href={url}
-        className="ml-2 rounded border-2 border-blue-500 bg-blue-100 p-1 transition-colors hover:bg-blue-200"
+        className="ml-2 rounded border-2 border-blue-500 bg-blue-100 p-1 transition-all duration-300 ease-out hover:bg-blue-200 active:border-green-500 active:bg-green-100"
         onClick={handleCopy}
       >
-        {copied ? 'Copied!' : 'Copy URL'}
+        {/* {copied ? 'Copied!' : 'Copy URL'} */}
+        Copy URL
       </Link>
     </div>
   );
