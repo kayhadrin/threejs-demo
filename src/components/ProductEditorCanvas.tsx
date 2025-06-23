@@ -2,7 +2,7 @@
 
 import { AccumulativeShadows, OrbitControls, RandomizedLight, Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Children, ReactNode, Suspense, useContext } from 'react';
+import { Children, ReactNode, Suspense } from 'react';
 import HtmlLabel from './HtmlLabel';
 
 export default function ProductEditorCanvas({ children }: { children?: ReactNode }) {
