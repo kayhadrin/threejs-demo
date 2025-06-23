@@ -20,7 +20,7 @@ export default function ShareButton({ url }: { url: string }) {
         className="ml-2 rounded border-2 border-blue-500 bg-blue-100 p-1 transition-all duration-300 ease-out hover:bg-blue-200 active:border-green-500 active:bg-green-100"
         onClick={handleCopy}
       >
-        Copy URL
+        Share
       </Link>
     </div>
   );

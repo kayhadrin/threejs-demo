@@ -3,7 +3,7 @@ import { ID, Nullish } from '@/TypeUtils';
 import { Overwrite } from '@react-three/drei/helpers/ts-utils';
 
 /**
- * Represents a material product
+ * Represents a physical product
  */
 export interface Product {
   id: ID<'Product'>;
