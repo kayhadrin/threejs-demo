@@ -71,7 +71,12 @@ export default function ProductEditorCanvas({ children }: { children?: ReactNode
       ) : null}
 
       {/* User Controls */}
-      <OrbitControls />
+      <OrbitControls
+        minAzimuthAngle={-Math.PI}
+        maxAzimuthAngle={Math.PI}
+        minPolarAngle={-Math.PI / 2}
+        maxPolarAngle={Math.PI}
+      />
     </Canvas>
   );
 }
