@@ -35,12 +35,13 @@ RUN apt-get install -y openssh-server
 
 # General utils
 RUN apt-get install -y vim
-RUN apt-get install -y unzip
-RUN apt-get install -y screen
 RUN apt-get install -y bzip2
+RUN apt-get install -y screen
+RUN apt-get install -y unzip
 
 # Development tools
 RUN apt-get install -y git
+RUN apt-get install -y graphviz
 RUN curl -fsSL https://deb.nodesource.com/setup_23.x -o /tmp/nodesource_setup.sh \
 	&& bash /tmp/nodesource_setup.sh \
 	&& apt-get install -y nodejs \
@@ -49,7 +50,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_23.x -o /tmp/nodesource_setup.sh
 # RUN npm install --global corepack@latest 
 # RUN corepack install -g pnpm@latest-10
 ## RUN corepack enable pnpm && corepack use pnpm@latest-10
-	
+
 # RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
 
 ENV LANG=en_US.utf8

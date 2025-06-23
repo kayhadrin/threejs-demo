@@ -21,6 +21,7 @@
     "// ship": "pnpm clean && pnpm build:all && pnpm test && pnpm publish -r --access public",
     "// test": "npm-run-all --parallel lint jest tsc:check lint:format",
     "// tsc:check": "tsc",
+    "doc:deps-graph": "madge --image docs/js-deps-graph.png ./src/",
     "test": "jest --runInBand",
     "test:watch": "jest --runInBand --watch"
   },
@@ -52,6 +53,7 @@
     "eslint-config-next": "15.3.3",
     "jest": "^30.0.2",
     "jest-environment-jsdom": "^30.0.2",
+    "madge": "^8.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "tailwindcss": "^4",

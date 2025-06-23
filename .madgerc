@@ -1,0 +1,27 @@
+{
+  "baseDir": "src",
+  "detectiveOptions": {
+    "ts": {
+      "skipTypeImports": true
+    },
+    "tsx": {
+      "skipTypeImports": true
+    }
+  },
+  "excludeRegExp": [
+    ".*/__tests__/.*"
+  ],
+  "fontSize": "12px",
+  "fileExtensions": [
+    "js",
+    "tsx",
+    "ts"
+  ],
+  "graphVizOptions": {
+    "G": {
+      "rankdir": "LR"
+    }
+  },
+  "layout": "dot",
+  "tsConfig": "tsconfig.json"
+}
