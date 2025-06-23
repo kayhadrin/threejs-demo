@@ -40,7 +40,7 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
     )?.[1];
   }, [containerTemplateID, containerTemplates]);
   //DEBUG
-  console.log('TemplateAssetModel:', TemplateAssetModel);
+  // console.log('TemplateAssetModel:', TemplateAssetModel);
 
   return (
     <IsClientsideContextProvider>
@@ -106,7 +106,7 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    console.log('Selected template:', template);
+                    // console.log('Selected template:', template);
                     setContainerTemplateID(template.id);
                   }}
                   title={`Select ${template.name}`}

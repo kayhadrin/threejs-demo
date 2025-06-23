@@ -6,7 +6,9 @@ exports[`ProductEditor component when the user selects a container material and 
     style=""
   >
     [[[ProductEditorCanvas
-    <div>
+    <div
+      data-testid="lazy3DModel-ShampooBottle3DModel"
+    >
       [[[ShampooBottle3DModel
       props = {}
       ShampooBottle3DModel]]]

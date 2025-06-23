@@ -29,7 +29,7 @@ describe('ProductEditor component', () => {
       await act(async () => {
         await user.click(screen.getByAltText(/Shampoo bottle/i));
       });
-
+      expect(screen.getByTestId('lazy3DModel-ShampooBottle3DModel')).toBeVisible();
       expect(container).toMatchSnapshot();
     });
   });

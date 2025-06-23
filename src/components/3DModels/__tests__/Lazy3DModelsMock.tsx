@@ -5,7 +5,7 @@ function createMockComponentModule(name: string) {
   return Promise.resolve({
     default: <T extends object>(props: T) => {
       return (
-        <div>
+        <div data-testid={`lazy3DModel-${name}`}>
           {`[[[${name}`}
           {`props = ${JSON.stringify(props, null, 2)}`}
           {`${name}]]]`}
