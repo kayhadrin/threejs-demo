@@ -20,6 +20,9 @@ importers:
       next:
         specifier: 15.3.3
         version: 15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      nullthrows:
+        specifier: ^1.1.1
+        version: 1.1.1
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -1668,6 +1671,9 @@ packages:
         optional: true
       sass:
         optional: true
+
+  nullthrows@1.1.1:
+    resolution: {integrity: sha512-2vPPEi+Z7WqML2jZYddDIfy5Dqb0r2fze2zTxNNknZaFpVHU3mFB3R+DWeJWGVx0ecvttSGlJTI+WG+8Z4cDWw==}
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -3926,6 +3932,8 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+
+  nullthrows@1.1.1: {}
 
   object-assign@4.1.1: {}
 

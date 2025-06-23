@@ -1,5 +1,6 @@
 import Lazy3DModels from '@/components/3DModels/Lazy3DModels';
 import { ID, Nullish } from '@/TypeUtils';
+import { Overwrite } from '@react-three/drei/helpers/ts-utils';
 
 /**
  * Represents a material product
@@ -7,7 +8,13 @@ import { ID, Nullish } from '@/TypeUtils';
 export interface Product {
   id: ID<'Product'>;
   name: string;
+  /**
+   * TODO: remove this from frontend because this
+   * foreign key to another model should only exist on
+   * the backend. The clientside should use the non-ID property directly.
+   */
   containerTemplateID: ID<'ContainerTemplate'>;
+  containerTemplate?: ContainerTemplate | Nullish;
   /**
    * Unit (mm)
    */
@@ -25,13 +32,24 @@ export interface Product {
   // labelImageID?: ID<'ImageAsset'>;
 }
 
+export type DraftProduct = Overwrite<
+  Product,
+  { containerTemplateID?: ID<'ContainerTemplate'> | Nullish }
+>;
+
 /**
  * Represents a template for a product container.
  */
 export interface ContainerTemplate {
   id: ID<'ContainerTemplate'>;
   name: string;
+  /**
+   * TODO: remove this from frontend because this
+   * foreign key to another model should only exist on
+   * the backend. The clientside should use the non-ID property directly.
+   */
   containerMaterialID: ID<'ContainerMaterial'>;
+  containerMaterial?: ContainerMaterial | Nullish;
   /**
    * Unit (mm)
    */
@@ -45,6 +63,7 @@ export interface ContainerTemplate {
    */
   depth: number;
   modelAssetID: ID<'ModelAsset'>;
+  modelAsset?: ModelAsset | Nullish;
 }
 
 /**
@@ -74,7 +93,13 @@ export interface ImageAsset {
    */
   height: number;
   desc: string;
+  /**
+   * TODO: remove this from frontend because this
+   * foreign key to another model should only exist on
+   * the backend. The clientside should use the non-ID property directly.
+   */
   thumbnailImageAssetID?: ID<'ImageAsset'> | Nullish;
+  thumbnailImageAsset?: ImageAsset | Nullish;
 }
 
 /**
@@ -85,6 +110,12 @@ export interface ModelAsset {
   name: string;
   desc: string;
   uiComponentName: keyof typeof Lazy3DModels;
+  /**
+   * TODO: remove this from frontend because this
+   * foreign key to another model should only exist on
+   * the backend. The clientside should use the non-ID property directly.
+   */
   thumbnailImageID: ID<'ImageAsset'>;
+  thumbnailImage?: ImageAsset | Nullish;
   licenseMd: string;
 }

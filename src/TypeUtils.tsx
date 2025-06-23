@@ -23,3 +23,17 @@ export function enforceMeshNode(object?: THREE.Object3D): THREE.Mesh {
   invariant(isMeshNode(object), 'Expected a THREE.Mesh node');
   return object;
 }
+
+export type PrimitiveValue = bigint | boolean | number | string | symbol;
+
+export type DeepReadonly<T> = {
+  // readonly [K in keyof T]: DeepReadonly<T[K]>;
+  readonly [K in keyof T]: T[K] extends PrimitiveValue | Nullish ? T[K] : DeepReadonly<T[K]>;
+};
+
+/**
+ * @example structuredClone(data) as DeepMutable<typeof data>;
+ */
+export type DeepMutable<T> = {
+  -readonly [K in keyof T]: DeepMutable<T[K]>;
+};
