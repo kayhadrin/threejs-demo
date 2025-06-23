@@ -2,13 +2,10 @@
 
 import { AccumulativeShadows, OrbitControls, RandomizedLight, Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
-import Lazy3DModels from './3DModels/Lazy3DModels';
+import { Children, ReactNode, Suspense, useContext } from 'react';
 import HtmlLabel from './HtmlLabel';
 
-export default function ProductEditorCanvas() {
-  // const ref = useRef<ExtractDreiForwardRefTarget<typeof OrbitControls>>(null);
-
+export default function ProductEditorCanvas({ children }: { children?: ReactNode }) {
   return (
     <Canvas
       className="top-0 left-0 z-0 h-full w-full"
@@ -27,43 +24,51 @@ export default function ProductEditorCanvas() {
         intensity={1}
       />
 
-      <Suspense
-        fallback={
-          <HtmlLabel rotation={[0, 0, 0]}>
-            <div
-              className="select-none"
-              style={{ position: 'absolute', fontSize: 16, scale: 4, letterSpacing: -0.5, left: 0 }}
+      {Children.count(children) > 0 ? (
+        <>
+          <Suspense
+            fallback={
+              <HtmlLabel rotation={[0, 0, 0]}>
+                <div
+                  className="select-none"
+                  style={{
+                    position: 'absolute',
+                    fontSize: 16,
+                    scale: 4,
+                    letterSpacing: -0.5,
+                    left: 0,
+                  }}
+                >
+                  Loading model...
+                </div>
+              </HtmlLabel>
+            }
+          >
+            <Stage
+              preset="rembrandt"
+              intensity={1}
+              environment={null}
             >
-              Loading model...
-            </div>
-          </HtmlLabel>
-        }
-      >
-        <Stage
-          preset="rembrandt"
-          intensity={1}
-          environment={null}
-        >
-          {/* <Lazy3DModels.BeerBottle3DModel /> */}
-          <Lazy3DModels.ShampooBottle3DModel />
-        </Stage>
-      </Suspense>
-
-      <AccumulativeShadows
-        frames={80}
-        color="black"
-        opacity={1}
-        scale={12}
-        position={[0, 0.04, 0]}
-      >
-        <RandomizedLight
-          amount={8}
-          radius={5}
-          ambient={0.5}
-          position={[5, 6, -10]}
-          bias={0.001}
-        />
-      </AccumulativeShadows>
+              {children}
+            </Stage>
+          </Suspense>
+          <AccumulativeShadows
+            frames={80}
+            color="black"
+            opacity={1}
+            scale={12}
+            position={[0, 0.04, 0]}
+          >
+            <RandomizedLight
+              amount={8}
+              radius={5}
+              ambient={0.5}
+              position={[5, 6, -10]}
+              bias={0.001}
+            />
+          </AccumulativeShadows>
+        </>
+      ) : null}
 
       {/* User Controls */}
       <OrbitControls />
