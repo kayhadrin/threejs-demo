@@ -12,7 +12,7 @@ export default async function ProductEditorPage({
 }) {
   const { containerMaterialID, containerTemplateID } = await searchParams;
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
+    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] gap-16 p-2 font-[family-name:var(--font-geist-sans)] sm:p-4 md:p-12">
       <main className="row-start-2 flex flex-col gap-[32px] sm:items-start">
         <ProductEditor
           init={{
