@@ -6,24 +6,31 @@ import { ContainerMaterial, ContainerTemplate } from '@/models/Models';
 import { castToID, DeepReadonly, ID, Nullish } from '@/TypeUtils';
 import Image from 'next/image';
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import ShareButton from './ShareButton';
 
 const ProductEditorCanvas = lazy(() => import('@/components/ProductEditorCanvas'));
 
-export default function ProductEditor() {
+export type InitProps = {
+  containerMaterialID?: ID<'ContainerMaterial'> | Nullish;
+  containerTemplateID?: ID<'ContainerTemplate'> | Nullish;
+};
+
+export default function ProductEditor({ init = {} }: { init?: InitProps }) {
   const containerMaterials = useContainerMaterials();
   //DEBUG
-  console.log('containerMaterials:', containerMaterials);
+  // console.log('containerMaterials:', containerMaterials);
 
-  const { containerTemplates, containerMaterialID, setContainerMaterialID } =
-    useContainerTemplates();
+  const { containerTemplates, containerMaterialID, setContainerMaterialID } = useContainerTemplates(
+    init.containerMaterialID
+  );
   //DEBUG
-  console.log('containerMaterialID:', containerMaterialID);
+  // console.log('containerMaterialID:', containerMaterialID);
 
-  const [containerTemplateID, setContainerTemplateID] = useState<
-    ID<'ContainerTemplate'> | Nullish
-  >();
+  const [containerTemplateID, setContainerTemplateID] = useState<ID<'ContainerTemplate'> | Nullish>(
+    init.containerTemplateID
+  );
   //DEBUG
-  console.log('containerTemplateID:', containerTemplateID);
+  // console.log('containerTemplateID:', containerTemplateID);
 
   const TemplateAssetModel = useMemo(() => {
     const template = containerTemplates.find((template) => template.id === containerTemplateID);
@@ -37,9 +44,7 @@ export default function ProductEditor() {
   return (
     <>
       <Suspense>
-        <ProductEditorCanvas>
-          {TemplateAssetModel && <TemplateAssetModel />}
-        </ProductEditorCanvas>
+        <ProductEditorCanvas>{TemplateAssetModel && <TemplateAssetModel />}</ProductEditorCanvas>
       </Suspense>
       <div className="z-0">
         <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">Product Editor</h1>
@@ -103,9 +108,47 @@ export default function ProductEditor() {
               ))}
             </div>
           </label>
+
+          {/* TODO: show ability to resize model */}
+          {/* TODO: WISH: add ability to choose a label decal */}
+
+          {containerMaterialID && containerTemplateID ? (
+            <div className="flex flex-col gap-4">
+              <ShareProducctEditorURL
+                {...{
+                  containerMaterialID,
+                  containerTemplateID,
+                }}
+              />
+            </div>
+          ) : null}
         </section>
       </div>
     </>
+  );
+}
+
+function ShareProducctEditorURL({
+  containerMaterialID,
+  containerTemplateID,
+}: {
+  containerMaterialID: ID<'ContainerMaterial'> | Nullish;
+  containerTemplateID: ID<'ContainerTemplate'> | Nullish;
+}) {
+  return (
+    <ShareButton
+      url={`${location.href.split('?')[0]}?${Object.entries({
+        containerMaterialID,
+        containerTemplateID,
+      })
+        .reduce((acc, [key, value]) => {
+          if (value) {
+            acc.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+          }
+          return acc;
+        }, [] as Array<string>)
+        .join('&')}`}
+    />
   );
 }
 
@@ -123,9 +166,9 @@ function useContainerMaterials() {
   return containerMaterials;
 }
 
-function useContainerTemplates() {
+function useContainerTemplates(initContainerMaterialID: ID<'ContainerMaterial'> | Nullish = null) {
   const [containerMaterialID, setContainerMaterialID] = useState<ID<'ContainerMaterial'> | Nullish>(
-    null
+    initContainerMaterialID
   );
   const [containerTemplates, setContainerTemplates] = useState<
     DeepReadonly<Array<ContainerTemplate>>
