@@ -1,25 +1,9 @@
-# ThreeJS demo app
+# 3D demo web app
 
 ## Goal
 
-- [ ] Demo a 3D SPA using your chosen 3D framework
-- [ ] Ensure application is **responsive** and works on **standard desktop browsers**
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [x] Demo a 3D SPA using your chosen 3D framework
+- [x] Ensure application is **responsive** and works on **standard desktop browsers**
 
 ## The state of 3D web rendering
 
@@ -53,3 +37,58 @@ It's clear that three.js is the most mature & popular 3D WebGL library out there
 On the other hand, Babylon.js and PlayCanvas are still very potent contenders thanks to their graphic feature completeness and e2e production tooling. But they seem to appeal to a smaller professional audience (e.g. game studios) as they are built & marketed as game engines; which is overkill for most general web applications.
 
 For the purpose of this 3D demo app, I'll use three.js.
+
+## Installation
+
+```bash
+pnpm install
+pnpm build --turbo
+pnpm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Preview
+
+![Demo preview](demo-preview.png)
+
+### Development
+
+It's recommended to use Docker to create a build & run this demo in a container:
+
+```bash
+# CWD: this git repo
+docker build -t threejs-demo .
+docker run --rm -it --mount "type=bind,src=$(realpath .),dst=/home/me" threejs-demo
+```
+
+# You can then run this command in the Docker container:
+
+```bash
+pnpm dev
+```
+
+# Known limitations
+
+- This demo simulates backend connections via an async DataLayer API.
+- Limited Jest unit testing since webGL canvas isn't available by default. Ideally, e2e tests would add better test coverage.
+- Jest `--watch` feature doesn't detect file changes on Windows + Docker. Just trigger test reruns manually...
+
+# Known issues
+
+- When loading the product editor with the beer bottle model by default, the view is occluded because the camera position is inside the bottle.
+- A "Loading..." notification is supposed to appear when the 3D model is being downloaded; but it doesn't always consistently appear
+- Some React warnings appear during Jest unit tests (related to `act()`) but I still manage to test the main target functionalities. (See `src/components/__tests__/ProductEditor.test.tsx`)
+
+# High-Level Summary of the Product Editor
+
+- `ProductEditorPage`: an async React Server Component page for Next.js.
+
+  - Renders a layout with a main section containing the `ProductEditor` component.
+  - Passes `containerMaterialID` and `containerTemplateID` from URL query params to `ProductEditor` to render initial product config.
+
+- `ProductEditor`:
+
+  - A React component responsible for rendering and managing the product editing UI.
+  - Expects an `init` prop with initial values for `containerMaterialID` and `containerTemplateID`.
+  - Manages form state (`DraftProduct` from `Models.ts`), basic validation, and render logic to display a 3D model for the product.
