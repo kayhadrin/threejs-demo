@@ -1,5 +1,4 @@
 import ProductEditor, { InitProps } from '@/components/ProductEditor';
-import { castToID } from '@/TypeUtils';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
