@@ -5,6 +5,7 @@ import DataLayer from '@/models/DataLayer';
 import { ContainerMaterial, ContainerTemplate } from '@/models/Models';
 import { castToID, DeepReadonly, ID, Nullish } from '@/TypeUtils';
 import Image from 'next/image';
+import Link from 'next/link';
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import ShareButton from './ShareButton';
 import { IsClientsideContextProvider, useIsClientsideContext } from './useIsClientside';
@@ -60,7 +61,13 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
         </ProductEditorCanvas>
       </Suspense>
       <div className="z-0 rounded bg-blue-100/50 p-4 sm:p-8 md:p-12">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">Product Editor</h1>
+        <Link
+          href="/"
+          className="text-blue-500 hover:underline"
+        >
+          Home
+        </Link>
+        /<h1 className="text-3xl font-bold tracking-tight sm:text-5xl">Product Editor</h1>
         <section className="flex flex-col gap-4">
           {/* Choose container material */}
           <label className="flex flex-col">
