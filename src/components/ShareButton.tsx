@@ -1,19 +1,13 @@
 import Link from 'next/link';
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent } from 'react';
 
 export default function ShareButton({ url }: { url: string }) {
-  const [copied, setCopied] = useState(false);
-
   const handleCopy = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
       await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_err) {
-      setCopied(false);
-    }
+    } catch (_err) {}
   };
 
   return (
