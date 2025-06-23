@@ -116,6 +116,9 @@ pnpm dev
 
   - React component dedicated to render a 3D product preview on a UI canvas
   - Target 3D product asset are loaded asynchronously
+  - React Three Fiber canvas and Drei components faciliate the following:
+    - viewport resizing
+    - ThreeJS canvas/object unmounting
 
 - `Lazy3DModels`:
 
