@@ -7,6 +7,7 @@ import { castToID, DeepReadonly, ID, Nullish } from '@/TypeUtils';
 import Image from 'next/image';
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import ShareButton from './ShareButton';
+import { useIsClientside } from './useIsClientside';
 
 const ProductEditorCanvas = lazy(() => import('@/components/ProductEditorCanvas'));
 
@@ -135,21 +136,24 @@ function ShareProducctEditorURL({
   containerMaterialID: ID<'ContainerMaterial'> | Nullish;
   containerTemplateID: ID<'ContainerTemplate'> | Nullish;
 }) {
-  return (
-    <ShareButton
-      url={`${location.href.split('?')[0]}?${Object.entries({
-        containerMaterialID,
-        containerTemplateID,
-      })
-        .reduce((acc, [key, value]) => {
-          if (value) {
-            acc.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
-          }
-          return acc;
-        }, [] as Array<string>)
-        .join('&')}`}
-    />
-  );
+  const isClientside = useIsClientside();
+  const fullURL = useMemo(() => {
+    return isClientside
+      ? `${window.location.href.split('?')[0]}?${Object.entries({
+          containerMaterialID,
+          containerTemplateID,
+        })
+          .reduce((acc, [key, value]) => {
+            if (value) {
+              acc.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+            }
+            return acc;
+          }, [] as Array<string>)
+          .join('&')}`
+      : '#';
+  }, [containerMaterialID, containerTemplateID, isClientside]);
+
+  return <ShareButton url={fullURL} />;
 }
 
 function useContainerMaterials() {
