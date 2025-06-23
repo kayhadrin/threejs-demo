@@ -7,7 +7,7 @@ import { castToID, DeepReadonly, ID, Nullish } from '@/TypeUtils';
 import Image from 'next/image';
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import ShareButton from './ShareButton';
-import { useIsClientside } from './useIsClientside';
+import { IsClientsideContextProvider, useIsClientsideContext } from './useIsClientside';
 
 const ProductEditorCanvas = lazy(() => import('@/components/ProductEditorCanvas'));
 
@@ -43,7 +43,7 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
   console.log('TemplateAssetModel:', TemplateAssetModel);
 
   return (
-    <>
+    <IsClientsideContextProvider>
       <Suspense>
         <ProductEditorCanvas>{TemplateAssetModel && <TemplateAssetModel />}</ProductEditorCanvas>
       </Suspense>
@@ -125,7 +125,7 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
           ) : null}
         </section>
       </div>
-    </>
+    </IsClientsideContextProvider>
   );
 }
 
@@ -136,7 +136,7 @@ function ShareProducctEditorURL({
   containerMaterialID: ID<'ContainerMaterial'> | Nullish;
   containerTemplateID: ID<'ContainerTemplate'> | Nullish;
 }) {
-  const isClientside = useIsClientside();
+  const isClientside = useIsClientsideContext();
   const fullURL = useMemo(() => {
     return isClientside
       ? `${window.location.href.split('?')[0]}?${Object.entries({
