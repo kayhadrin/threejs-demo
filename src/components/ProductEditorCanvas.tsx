@@ -11,7 +11,6 @@ export default function ProductEditorCanvas() {
 
   return (
     <Canvas
-      id="product_editor_canvas"
       className="top-0 left-0 z-0 h-full w-full"
       // Keep explicit "fixed" position to ensure it covers the entire viewport
       style={{ position: 'fixed' }}
@@ -45,7 +44,7 @@ export default function ProductEditorCanvas() {
           intensity={1}
           environment={null}
         >
-          {/* <BeerBottle3DModel /> */}
+          {/* <Lazy3DModels.BeerBottle3DModel /> */}
           <Lazy3DModels.ShampooBottle3DModel />
         </Stage>
       </Suspense>
