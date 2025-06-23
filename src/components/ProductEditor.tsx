@@ -44,8 +44,20 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
 
   return (
     <IsClientsideContextProvider>
-      <Suspense>
-        <ProductEditorCanvas>{TemplateAssetModel && <TemplateAssetModel />}</ProductEditorCanvas>
+      <Suspense
+        fallback={
+          <div
+            className="top-0 left-0 z-0 h-full w-full p-4 sm:p-8 md:p-12"
+            // Keep explicit "fixed" position to ensure it covers the entire viewport
+            style={{ position: 'fixed' }}
+          >
+            <p>Loading 3D canvas...</p>
+          </div>
+        }
+      >
+        <ProductEditorCanvas>
+          {TemplateAssetModel && <TemplateAssetModel key={String(containerTemplateID)} />}
+        </ProductEditorCanvas>
       </Suspense>
       <div className="z-0 rounded bg-blue-100/50 p-4 sm:p-8 md:p-12">
         <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">Product Editor</h1>
