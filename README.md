@@ -64,7 +64,11 @@ scripts/docker/build_n_dev.sh
 # You can then run this command in the Docker container:
 
 ```bash
+# start local webserver
 pnpm dev
+
+# run test suite
+pnpm test
 ```
 
 # High-level summary of JS modules
