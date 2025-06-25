@@ -72,9 +72,8 @@ const backendDataMock: {
       desc: 'Shampoo bottle.',
       uiComponentName: 'ShampooBottle3DModel',
       thumbnailImageID: castToID('image-asset-1'),
-      licenseMd: `Author: [Sousinho](https://sketchfab.com/sousinho)
-License: [SKETCHFAB Standard](https://sketchfab.com/licenses)
-Source: https://sketchfab.com/3d-models/shampoo-bottle-38508e5df44840ebae254e40e1ebd73f`,
+      licenseMd: `by [Sousinho](https://sketchfab.com/sousinho) ([source](https://sketchfab.com/3d-models/shampoo-bottle-38508e5df44840ebae254e40e1ebd73f))
+License: [SKETCHFAB Standard](https://sketchfab.com/licenses)`,
     },
     {
       id: castToID('model-asset-2'),
@@ -82,9 +81,8 @@ Source: https://sketchfab.com/3d-models/shampoo-bottle-38508e5df44840ebae254e40e
       desc: 'Beer glass bottle.',
       uiComponentName: 'BeerBottle3DModel',
       thumbnailImageID: castToID('image-asset-2'),
-      licenseMd: `Author: [gelmi.com.br](https://sketchfab.com/rodrigogelmi)
-License: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
-Source: https://sketchfab.com/3d-models/beer-bottle-c3de7f8b092e4092aef14d4ffc9fac7f`,
+      licenseMd: `by [gelmi.com.br](https://sketchfab.com/rodrigogelmi) ([source](https://sketchfab.com/3d-models/beer-bottle-c3de7f8b092e4092aef14d4ffc9fac7f))
+License: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)`,
     },
   ],
 };

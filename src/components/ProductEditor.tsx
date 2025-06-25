@@ -7,6 +7,7 @@ import { castToID, DeepReadonly, ID, Nullish } from '@/TypeUtils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import MarkdownPreview from './MarkdownPreview';
 import ShareButton from './ShareButton';
 import { IsClientsideContextProvider, useIsClientsideContext } from './useIsClientside';
 
@@ -31,15 +32,17 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
   const [containerTemplateID, setContainerTemplateID] = useState<ID<'ContainerTemplate'> | Nullish>(
     init.containerTemplateID
   );
+
   //DEBUG
   // console.log('containerTemplateID:', containerTemplateID);
 
+  const template = containerTemplateID != null ? containerTemplates[containerTemplateID] : null;
   const TemplateAssetModel = useMemo(() => {
-    const template = containerTemplates.find((template) => template.id === containerTemplateID);
     return Object.entries(Lazy3DModels).find(
       ([key]) => key === template?.modelAsset?.uiComponentName
     )?.[1];
-  }, [containerTemplateID, containerTemplates]);
+  }, [template]);
+
   //DEBUG
   // console.log('TemplateAssetModel:', TemplateAssetModel);
 
@@ -97,10 +100,10 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
           <label className="flex flex-col">
             <span className="mb-1 font-medium">Container Template</span>
             <div className="flex flex-wrap gap-4">
-              {containerTemplates.length === 0 && (
+              {Object.keys(containerTemplates).length === 0 && (
                 <span className="text-gray-500">No templates available</span>
               )}
-              {containerTemplates.map((template) => (
+              {Object.values(containerTemplates).map((template) => (
                 <button
                   key={template.id}
                   type="button"
@@ -129,6 +132,11 @@ export default function ProductEditor({ init = {} }: { init?: InitProps }) {
               ))}
             </div>
           </label>
+
+          {/* Show asset's description */}
+          <div>
+            <MarkdownPreview markdown={template?.modelAsset?.licenseMd} />
+          </div>
 
           {/* TODO: show ability to resize model */}
           {/* TODO: WISH: add ability to choose a label decal */}
@@ -195,15 +203,22 @@ function useContainerTemplates(initContainerMaterialID: ID<'ContainerMaterial'> 
     initContainerMaterialID
   );
   const [containerTemplates, setContainerTemplates] = useState<
-    DeepReadonly<Array<ContainerTemplate>>
-  >([]);
+    DeepReadonly<{ [id: string]: ContainerTemplate }>
+  >({});
 
   useEffect(() => {
     (async () => {
       if (!containerMaterialID) {
-        return setContainerTemplates([]);
+        return setContainerTemplates({});
       }
-      setContainerTemplates(await DataLayer.getContainerTemplates(containerMaterialID));
+      setContainerTemplates(
+        (await DataLayer.getContainerTemplates(containerMaterialID)).reduce<{
+          [id: string]: ContainerTemplate;
+        }>((acc, item) => {
+          acc[item.id] = item;
+          return acc;
+        }, {})
+      );
     })();
   }, [containerMaterialID]);
 
