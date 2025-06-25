@@ -95,6 +95,37 @@ exports[`ProductEditor component when the user selects a container material and 
           </button>
         </div>
       </label>
+      <div>
+        <div
+          class="markdownPreviewContent"
+        >
+          <p>
+            by 
+            <a
+              href="https://sketchfab.com/sousinho"
+            >
+              Sousinho
+            </a>
+             (
+            <a
+              href="https://sketchfab.com/3d-models/shampoo-bottle-38508e5df44840ebae254e40e1ebd73f"
+            >
+              source
+            </a>
+            )
+            <br />
+            
+License: 
+            <a
+              href="https://sketchfab.com/licenses"
+            >
+              SKETCHFAB Standard
+            </a>
+          </p>
+          
+
+        </div>
+      </div>
       <div
         class="flex flex-col gap-4"
       >
