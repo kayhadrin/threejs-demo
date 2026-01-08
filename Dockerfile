@@ -7,45 +7,23 @@
 # docker run --rm -it --mount "type=bind,src=$(realpath .),dst=/home/me" threejs-demo
 ######
 
-FROM ubuntu:latest@sha256:b59d21599a2b151e23eea5f6602f4af4d7d31c4e236d22bf0b62b86d2e386b8f
+FROM ubuntu:latest
 LABEL org.opencontainers.image.authors="kayhadrin@gmail.com"
 
 # ARG	DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update
-
-# TODO: remove unnecessary packages below
-
-# Perf monitoring tools
-RUN apt-get install -y atop
-RUN apt-get install -y htop
-RUN apt-get install -y iotop
-RUN apt-get install -y lsof
-
-# Network tools
-RUN apt-get install -y curl
-RUN apt-get install -y dnsutils
-RUN apt-get install -y iftop
-RUN apt-get install -y inetutils-ping
-RUN apt-get install -y net-tools
-
-# Admin tools
-RUN apt-get install -y sudo
-RUN apt-get install -y openssh-server
-
-# General utils
-RUN apt-get install -y vim
-RUN apt-get install -y bzip2
-RUN apt-get install -y screen
-RUN apt-get install -y unzip
-
-# Development tools
-RUN apt-get install -y git
-RUN apt-get install -y graphviz
-RUN curl -fsSL https://deb.nodesource.com/setup_23.x -o /tmp/nodesource_setup.sh \
-	&& bash /tmp/nodesource_setup.sh \
-	&& apt-get install -y nodejs \
-	&& node -v
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates curl \
+ && curl -fsSL https://deb.nodesource.com/setup_23.x -o /tmp/nodesource_setup.sh \
+ && bash /tmp/nodesource_setup.sh \
+ && apt-get install -y --no-install-recommends \
+  atop htop iotop lsof \
+  dnsutils iftop inetutils-ping net-tools \
+  sudo openssh-server \
+  vim bzip2 screen unzip \
+  git graphviz nodejs \
+ && rm -rf /var/lib/apt/lists/* \
+ && node -v
 
 # RUN npm install --global corepack@latest 
 # RUN corepack install -g pnpm@latest-10
